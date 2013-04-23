@@ -1,8 +1,8 @@
 Ext.Loader.setConfig({
 	enabled:true,
 	paths:{
-		'SampleApp':'js/sampleapp',
-		'Ext.ux':'js/ux'
+		'SampleApp':'sampleapp',
+		'Ext.ux':'ux'
 	}
 });
 
