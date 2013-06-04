@@ -12,9 +12,6 @@ Ext.define('Ext.ux.LeafletMapView', {
 		tileMaxZoom: 18,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 	},
-	initComponent: function(){
-		this.callParent(arguments);
-	},
 	afterRender: function(t, eOpts){
 		this.callParent(arguments);
 
@@ -25,8 +22,10 @@ Ext.define('Ext.ux.LeafletMapView', {
 			var map = L.map(this.getId());
 			this.setMap(map);
 
-			if (this.getInitialLocation() && this.getInitialZoomLevel()){
-				map.setView(this.getInitialLocation(), this.getInitialZoomLevel());
+			var initialLocation = this.getInitialLocation();
+			var initialZoomLevel = this.getInitialZoomLevel();
+			if (initialLocation && initialZoomLevel){
+				map.setView(initialLocation, initialZoomLevel);
 			} else {
 				map.fitWorld();
 			}
@@ -47,8 +46,9 @@ Ext.define('Ext.ux.LeafletMapView', {
 	},
 	onResize: function(w, h, oW, oH){
 		this.callParent(arguments);
-		if (this.getMap()){
-			this.getMap().invalidateSize();
+		var map = this.getMap();
+		if (map){
+			map.invalidateSize();
 		}
 	}
 });
